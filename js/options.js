@@ -1,13 +1,17 @@
 var defaultHome = "chrome://newtab";
 
 function loadOptions() {
-	chrome.storage.sync.get({'home_url': defaultHome, "position-h": "center", "position-v": "bottom"}, function (result) {
+	chrome.storage.sync.get({timeout: 60, 'home_url': defaultHome, "position-h": "center", "position-v": "bottom"}, function (result) {
 	  console.log("Got options: " + JSON.stringify(result))
-	  var home = result.home_url;
-	  var home_url = document.getElementById("home_url");
+	  
 	  $('input[value="' + result['position-h'] + '"]').prop('checked', true);
 	  $('input[value="' + result['position-v'] + '"]').prop('checked', true);
-	  home_url.value = home;
+    
+    var home_url = document.getElementById("home_url");
+    home_url.value = result.home_url;
+    
+    var tout = document.getElementById("timeout");
+    tout.value = result.timeout;
 	});
 }
 
@@ -15,10 +19,12 @@ function saveOptions() {
 	var home_url = document.getElementById("home_url").value;
 	if (!home_url.startsWith("http")) {
 	  home_url = "http://" + home_url;
-	}
+  }
+  var timeout =  document.getElementById("timeout").value * 1;
+
 	var positionH = $('input[name="position-h"]:checked').val();
 	var positionV = $('input[name="position-v"]:checked').val();
-	chrome.storage.sync.set({'home_url': home_url, 'position-h': positionH, 'position-v': positionV}, function () {
+	chrome.storage.sync.set({'timeout': timeout,'home_url': home_url, 'position-h': positionH, 'position-v': positionV}, function () {
 	  console.log("Was set!");
 	  updateNavigator();
 	});
@@ -26,7 +32,8 @@ function saveOptions() {
 
 function eraseOptions() {
   chrome.storage.sync.remove(['home_url', 'position-h', 'position-v']);
-  var home_url = document.getElementById("home_url").value = defaultHome;
+  document.getElementById("home_url").value = defaultHome;
+  document.getElementById("timeout").value = 60;
 }
 
 function updateNavigator() {

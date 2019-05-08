@@ -1,8 +1,7 @@
 {
-	"name": "SimpleKiosk",
+	"name": "sft-SimpleKiosk",
 	"version": "0.0.1",
-	"description": "Implements a simple navigation system for Chrome/ium in Kiosk mode",
-	"homepage_url": "https://github.com/devilicecream/simplekiosk",
+	"description": "sft-kiosk",
 	"options_page": "options.html",
 	"browser_action": {
 		"default_popup": "options.html"
@@ -11,9 +10,10 @@
 	"minimum_chrome_version": "49",
 	"permissions": [
         "webNavigation",
-		"*://*/*",
 		"storage",
-		"tabs"
+		"tabs",
+		"*://*/*",
+		"idle"
 	],
 	"icons": {
 		"128": "icon.png"
@@ -38,6 +38,7 @@
 	],
     "web_accessible_resources": [
         "img/back.png",
-        "img/home.png"
+        "img/home.png",
+        "img/close.png"
     ]
 }
