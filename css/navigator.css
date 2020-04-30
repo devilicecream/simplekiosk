@@ -48,7 +48,7 @@
   -webkit-border-top-right-radius: 0px;
 }
 
-#simplekiosk-backbutton, #simplekiosk-homebutton {
+#simplekiosk-backbutton, #simplekiosk-homebutton, #simplekiosk-closebutton {
   border-radius: 0 !important;
   border-width: 0 !important;
   border-color: transparent !important;
@@ -67,16 +67,16 @@
   cursor: pointer;
 }
 
-#simplekiosk-backbutton:hover, #simplekiosk-homebutton:hover {
+#simplekiosk-backbutton:hover, #simplekiosk-homebutton:hover, #simplekiosk-closebutton:hover  {
   opacity: .5;
 }
 
-#simplekiosk-backbutton:focus, #simplekiosk-homebutton:focus,
-#simplekiosk-backbutton:active, #simplekiosk-homebutton:active {
+#simplekiosk-backbutton:focus, #simplekiosk-homebutton:focus, #simplekiosk-closebutton:focus,
+#simplekiosk-backbutton:active, #simplekiosk-homebutton:active, #simplekiosk-closebutton:active {
   outline-width: 0;
 }
 
-#simplekiosk-navigator.left #simplekiosk-backbutton, #simplekiosk-navigator.left #simplekiosk-homebutton,
-#simplekiosk-navigator.right #simplekiosk-backbutton, #simplekiosk-navigator.right #simplekiosk-homebutton {
+#simplekiosk-navigator.left #simplekiosk-backbutton, #simplekiosk-navigator.left #simplekiosk-homebutton, #simplekiosk-navigator.left #simplekiosk-closebutton,
+#simplekiosk-navigator.right #simplekiosk-backbutton, #simplekiosk-navigator.right #simplekiosk-homebutton, #simplekiosk-navigator.right #simplekiosk-closebutton {
   padding: 2px 20% 0;
 }
