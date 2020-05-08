@@ -1,11 +1,18 @@
-var defaultHome = "chrome://newtab";
+var defaultHome = "https://www.google.com";
 
 function loadOptions() {
-	chrome.storage.sync.get({timeout: 60, 'home_url': defaultHome, "position-h": "center", "position-v": "bottom"}, function (result) {
+	chrome.storage.sync.get({
+	    timeout: 60,
+	    home_url: defaultHome,
+	    "position-h": "center",
+	    "position-v": "bottom",
+	    autoreload: false
+	}, function (result) {
 	  console.log("Got options: " + JSON.stringify(result))
 	  
 	  $('input[value="' + result['position-h'] + '"]').prop('checked', true);
 	  $('input[value="' + result['position-v'] + '"]').prop('checked', true);
+	  $('input[name="autoreload"]').prop('checked', result.autoreload);
     
     var home_url = document.getElementById("home_url");
     home_url.value = result.home_url;
@@ -17,21 +24,27 @@ function loadOptions() {
 
 function saveOptions() {
 	var home_url = document.getElementById("home_url").value;
-	if (!home_url.startsWith("http")) {
-	  home_url = "http://" + home_url;
-  }
-  var timeout =  document.getElementById("timeout").value * 1;
+	if (!home_url.startsWith("http") && home_url != defaultHome) {
+	  home_url = "https://" + home_url;
+    }
+    var timeout =  document.getElementById("timeout").value * 1;
+    var autoreload = document.getElementById("autoreload").checked;
 
 	var positionH = $('input[name="position-h"]:checked').val();
 	var positionV = $('input[name="position-v"]:checked').val();
-	chrome.storage.sync.set({'timeout': timeout,'home_url': home_url, 'position-h': positionH, 'position-v': positionV}, function () {
-	  console.log("Was set!");
-	  updateNavigator();
+	chrome.storage.sync.set({
+	    timeout: timeout,
+	    home_url: home_url,
+	    "position-h": positionH,
+	    "position-v": positionV,
+	    autoreload: autoreload
+	}, function () {
+	    updateNavigator();
 	});
 }
 
 function eraseOptions() {
-  chrome.storage.sync.remove(['home_url', 'position-h', 'position-v']);
+  chrome.storage.sync.remove(['home_url', 'position-h', 'position-v', 'autoreload', 'timeout']);
   document.getElementById("home_url").value = defaultHome;
   document.getElementById("timeout").value = 60;
 }

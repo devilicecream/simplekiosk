@@ -1,7 +1,7 @@
 {
-	"name": "sft-SimpleKiosk",
-	"version": "0.0.1",
-	"description": "sft-kiosk",
+	"name": "SimpleKiosk",
+	"version": "0.2.0",
+	"description": "simplekiosk",
 	"options_page": "options.html",
 	"browser_action": {
 		"default_popup": "options.html"
@@ -19,7 +19,10 @@
 		"128": "icon.png"
 	},
 	"background": {
-		"scripts": ["js/background.js"]
+		"scripts": [
+			"js/background.js"
+		],
+		"persistent": true
 	},
 	"content_scripts": [
 		{

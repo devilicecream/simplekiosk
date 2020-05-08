@@ -5,6 +5,7 @@
 
 - Customizable position in the page
 - Show/Hide trigger in the popup
+- Optional autoreload to home with configurable timeout
 
 
 ## Install
